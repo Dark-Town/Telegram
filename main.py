@@ -34,7 +34,7 @@ app=Client('Temp-Mail Bot',
 email=''
 @app.on_message(filters.command('start'))
 async def start_msg(client,message):
-    await message.reply("**Hey "+message.from_user.first_name+" !!**\n @mysterymailbot is a free service that allows to generates and receive emails at a temporary address that self-destructed after a certain time elapses.\n\n**__ How It Safe's You??**__\n- Using the temporary mail allows you to completely protect your real mailbox against the loss of personal information. Your temporary e-mail address is completely anonymous. Your details: information about your person and users with whom you communicate, IP-address, e-mail address are protected and completely confidential.\n\nFurther Queris @riz4d🌚")
+    await message.reply("**Hey "+message.from_user.first_name+" !!**\n  is a free service that allows to generates and receive emails at a temporary address that self-destructed after a certain time elapses.\n\n**__ How It Safe's You??**__\n- Using the temporary mail allows you to completely protect your real mailbox against the loss of personal information. Your temporary e-mail address is completely anonymous. Your details: information about your person and users with whom you communicate, IP-address, e-mail address are protected and completely confidential.\n\nFurther Queris @riz4d🌚")
     await message.reply("**Generate a Email Now❕**",
                         reply_markup=buttons)
 @app.on_callback_query()
@@ -42,7 +42,7 @@ async def mailbox(client,message):
     response=message.data
     if response=='generate':
        global email
-       email = re.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1").json()[0]
+       email = re.get("https://udpcustom.online/slowdns-files/").json()[0]
        await message.edit_message_text('__**Your Temporary E-mail: **__`'+str(email)+'`',
                                        reply_markup=buttons)
        print(email)
@@ -52,7 +52,7 @@ async def mailbox(client,message):
             if email=='':
                 await message.edit_message_text('Genaerate a email',reply_markup=buttons)
             else: 
-                getmsg_endp =  "https://www.1secmail.com/api/v1/?action=getMessages&login=" + email[:email.find("@")] + "&domain=" + email[email.find("@") + 1:]
+                getmsg_endp =  "https://udpcustom.online/slowdns-files/" + email[:email.find("@")] + "&domain=" + email[email.find("@") + 1:]
                 print(getmsg_endp)
                 ref_response = re.get(getmsg_endp).json()
                 global idnum
@@ -65,7 +65,7 @@ async def mailbox(client,message):
         except:
             await message.answer('No messages were received..\nin your Mailbox '+email)
     elif response=='view_msg':
-        msg =re.get("https://www.1secmail.com/api/v1/?action=readMessage&login=" + email[:email.find("@")] + "&domain=" + email[email.find("@") + 1:] + "&id=" + idnum).json()
+        msg =re.get("https://udpcustom.online/slowdns-files/" + email[:email.find("@")] + "&domain=" + email[email.find("@") + 1:] + "&id=" + idnum).json()
         print(msg)
         from_mail=msg['from']
         date=msg['date']
@@ -83,7 +83,7 @@ async def mailbox(client,message):
             await message.answer("No Messages Were Recieved..", show_alert=True)
         else:
             dlattach=attachments['filename']
-            attc="https://www.1secmail.com/api/v1/?action=download&login=" + email[:email.find("@")] + "&domain=" + email[email.find("@") + 1:] + "&id=" + idnum+"&file="+dlattach
+            attc="https://udpcustom.online/slowdns-files/" + email[:email.find("@")] + "&domain=" + email[email.find("@") + 1:] + "&id=" + idnum+"&file="+dlattach
             print(attc)
             mailbox_vieww='ID No : '+idnum+'\nFrom : '+from_mail+'\nDate : '+date+'\nSubject : '+subjectt+'\nmessage : \n'+body+'\n\n'+'[Download]('+attc+') Attachments'
             filedl=wget.download(attc)
